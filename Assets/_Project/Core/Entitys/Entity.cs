@@ -8,9 +8,25 @@ namespace Core.Entitys
         public float currentHealth { get; private set; }
         public float damage { get; private set; } = 10f;
 
-        public void UpdateData(string NewPlayerName = null, int? NewPlayerHealth = null)
+        public void UpdateData(float? CurrentHealth = null, float? MaxHealth = null, float? Damage = null)
         {
-            
+            if (CurrentHealth.HasValue) currentHealth = CurrentHealth.Value;
+            if (MaxHealth.HasValue) maxHealth = MaxHealth.Value;
+            if (Damage.HasValue) damage = Damage.Value;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            currentHealth -= damage;
+            if (currentHealth <= 0)
+            {
+                Death();
+            }
+        }
+
+        public void Death()
+        {
+
         }
     }
 }
